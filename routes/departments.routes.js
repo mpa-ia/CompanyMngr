@@ -37,7 +37,7 @@ router.post('/departments', async (req, res) => {
     const { name } = req.body;
     const newDepartment = new Department({ name: name });
     await newDepartment.save();
-    res.json({ message: 'OK' });
+    res.json(newDepartment);
   } catch (err) {
       res.status(500).json(err);
   }
@@ -49,7 +49,7 @@ router.put('/departments/:id', async (req, res) => {
     const dep = await(Department.findById(req.params.id));
     if (dep) {
       await Department.updateOne({ _id: req.params.id }, { $set: { name: name } });
-      res.json({ message: 'OK' });
+      res.json(dep);
     } else res.status(404).json({ message: 'Not found...' });
   } catch (err) {
       res.status(500).json(err);
