@@ -43,22 +43,22 @@ router.post('/departments', async (req, res) => {
   }
 });
 
-router.put('/departments/:id', async (req, res) => {
+router.put('/departments/:id', (req, res) => {
   const { name } = req.body;
   try {
-    await(Department.findByIdAndUpdate(req.params.id, { $set: { name: name } }, { new: true }, (err, doc) => {
+    Department.findByIdAndUpdate(req.params.id, { $set: { name: name } }, { new: true }, (err, doc) => {
       err? res.status(404).json({ message: 'Not found...' }) : res.json(doc);
-    }));
+    });
   } catch (err) {
       res.status(500).json(err);
   }
 });
 
-router.delete('/departments/:id', async (req, res) => {
+router.delete('/departments/:id', (req, res) => {
   try {
-    await (Department.findByIdAndDelete(req.params.id, { new: false }, (err, doc) => {
-      err? res.status(404).json({ message: 'Not found...' }) : res.json(doc);
-    }));
+      Department.findByIdAndDelete(req.params.id, { new: false }, (err, doc) => {
+        err? res.status(404).json({ message: 'Not found...' }) : res.json(doc);
+    });
   } catch (err) {
       res.status(500).json(err);
   }
