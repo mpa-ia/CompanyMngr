@@ -30,6 +30,13 @@ describe('Department', () => {
             });
         }
     });
+    it('should work properly if "name" is correct', () => {
+        const name = 'Lorem ipsum';
+        const dep = new Department ({ name });
+        dep.validate(err => {
+            expect(err).to.not.exist;
+        });
+    });
 });
 
 
