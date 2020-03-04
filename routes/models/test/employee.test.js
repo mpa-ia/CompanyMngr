@@ -17,6 +17,21 @@ describe('Employee', () => {
         });
     }
  });
+ it('should throw error if args are not strings', () => {
+     const [ func, object, array, string ] = [function () {}, {}, [], 'loremIpsum'];
+     const testDep1 = new Employee({ firstName: string, lastName: array, department: string});
+     const testDep2 = new Employee({ firstName: object, lastName: string, department: string});
+     const testDep3 = new Employee({ firstName: string, lastName: array, department: func});
+     const testDep4 = new Employee({ firstName: object, lastName: func, department: array});
+
+     const cases = [testDep1, testDep2, testDep3, testDep4];
+
+     for (let testDep of cases) {
+         testDep.validate(err => {
+            expect(err.errors).to.exist;
+        });
+     }
+ });
 });
 
 after(() => {
