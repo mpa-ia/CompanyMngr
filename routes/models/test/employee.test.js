@@ -30,7 +30,14 @@ describe('Employee', () => {
          testDep.validate(err => {
             expect(err.errors).to.exist;
         });
-     }
+    }
+ });
+ it('should work properly if args are correct', () => {
+    const [ firstName, lastName, department ] = ['Amanda', 'Doe', 'Marketing'];
+    const dep = new Employee({ firstName: firstName, lastName: lastName, department: department });
+    dep.validate(err => {
+        expect(err).to.not.exist;
+    });
  });
 });
 
