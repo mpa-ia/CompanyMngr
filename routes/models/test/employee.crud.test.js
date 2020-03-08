@@ -19,13 +19,13 @@ describe('Employee', () => {
         beforeEach(async () => {
             try {
             const testDepOne = new Employee ({ firstName: 'Anna', lastName: 'Doe', department: 'Marketing' });
-            await testDepOne.save().then(testDepOne);
+            await testDepOne.save();
 
             const testDepTwo = new Employee ({ firstName: 'John', lastName: 'Smith', department: 'Quality' });
-            await testDepTwo.save().then(testDepTwo);
+            await testDepTwo.save();
 
             const testDepThree = new Employee ({ firstName: 'Henry', lastName: 'Moore', department: 'Quality' });
-            await testDepThree.save().then(testDepThree);
+            await testDepThree.save();
             } catch (e) {
                 console.log(e);
             }
