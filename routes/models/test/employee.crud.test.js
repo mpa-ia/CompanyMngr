@@ -18,40 +18,48 @@ describe('Employee', () => {
     describe('Reading data', () => {
         beforeEach(async () => {
             try {
-            const testDepOne = new Employee ({ firstName: 'Anna', lastName: 'Doe', department: 'Marketing' });
-            await testDepOne.save();
+                const employeeOne = new Employee({ firstName: 'Anna', lastName: 'Doe', department: 'Marketing' });
+                await employeeOne.save();
 
-            const testDepTwo = new Employee ({ firstName: 'John', lastName: 'Smith', department: 'Quality' });
-            await testDepTwo.save();
+                const employeeTwo = new Employee({ firstName: 'John', lastName: 'Smith', department: 'Quality' });
+                await employeeTwo.save();
 
-            const testDepThree = new Employee ({ firstName: 'Henry', lastName: 'Moore', department: 'Quality' });
-            await testDepThree.save();
+                const employeeThree = new Employee({ firstName: 'Henry', lastName: 'Moore', department: 'Quality' });
+                await employeeThree.save();
             } catch (e) {
                 console.log(e);
             }
         });
         it('should return all the data with "find" method', async () => {
             try {
-            const employees = await Employee.find();
-            const qualityDepEmployees = await Employee.find({ department: 'Quality' });
+                const employees = await Employee.find();
+                const qualityDepEmployees = await Employee.find({ department: 'Quality' });
 
-            expect(employees.length).to.be.equal(3);
-            expect(qualityDepEmployees.length).to.be.equal(2);
+                expect(employees.length).to.be.equal(3);
+                expect(qualityDepEmployees.length).to.be.equal(2);
             } catch (e) {
                 console.log(e);
             }
         });
         it('should return proper document by various params with "findOne" method', async () => {
-            const employee1 = await Employee.findOne({ department: 'Marketing' });
-            const employee2 = await Employee.findOne({ firstName: 'John' });
-            const employee3 = await Employee.findOne({ lastName: 'Moore' });
+            try {
+                const employee1 = await Employee.findOne({ department: 'Marketing' });
+                const employee2 = await Employee.findOne({ firstName: 'John' });
+                const employee3 = await Employee.findOne({ lastName: 'Moore' });
 
-            expect(employee1.department).to.equal('Marketing');
-            expect(employee2.firstName).to.be.equal('John');
-            expect(employee3.lastName).to.be.equal('Moore');
+                expect(employee1.department).to.be.equal('Marketing');
+                expect(employee2.firstName).to.be.equal('John');
+                expect(employee3.lastName).to.be.equal('Moore');
+            } catch (e) {
+                console.log(e);
+            }
         });
         after(async () => {
-            await Employee.deleteMany();
+            try {
+                await Employee.deleteMany();
+            } catch (e) {
+                console.log(e);
+            }
         });
     });
 });
